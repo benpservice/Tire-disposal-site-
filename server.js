@@ -101,7 +101,13 @@ app.delete('/api/pickups/:id', requireAuth, (req, res) => {
 });
 
 // ---------- Static site (after API routes) ----------
-app.use(express.static(path.join(__dirname, 'public')));
+// ---------- Static site ----------
+app.use(express.static(__dirname));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Tire Disposal & Distribution server running on port ${PORT}`));
